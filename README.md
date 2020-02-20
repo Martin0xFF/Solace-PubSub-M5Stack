@@ -1,4 +1,7 @@
-Please use a linux distro for the following, Mac will also work but just be aware of different port names
+# Preluminary
+Please use a linux distro for the following tutorial
+..* You can dual boot you computer : https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/
+..* You can set up a VM with a linux distro : https://brb.nci.nih.gov/seqtools/installUbuntu.html
 
 To effectively use Micropython on the M5stack you will need python3, esptool.py, and adafruit-ampy 
 ```zsh
@@ -6,20 +9,22 @@ pip3 install esptool
 pip3 install adafruit-ampy
 ```
 
+## Flash Micropython onto your M5Stack Gray
+This repo has a version of micropython for the M5Stack already availible. You can create your own firmware if you clone the following repo: https://github.com/m5stack/M5Stack_MicroPython
 
-# First you will need flash Micropython onto your M5Stack Gray
-Connect the M5stack to you computer and verify that it is connected by checking /dev
+1. Connect the M5stack to you computer and verify that it is connected by checking /dev
 ```zsh
 ls /dev |grep ttyUSB
 ```
-You should see it on ttyUSB0, if there are multiple ttyUSB* then remove peripherals connected to your computer or take note of the tty that the m5stack uses and replace accordingly within upload.sh.
-
+**You should see it on ttyUSB0, if there are multiple ttyUSB* then remove peripherals connected to your computer or take note of the tty that the m5stack uses and replace accordingly within upload.sh.**
+2. Enter the firmware directory and call the flash script
 ```zsh
 cd firmware
 sh upload.sh
 ```
-This should install a special version of micropython able to utilize the M5stacks on board peripherals.
-to test this connect to the board via serial. (once again replace ttyUSB0 with your port if needed)
+
+This should install a special version of micropython able to utilize the M5Stack's on board peripherals.
+3. To test this connect to the board via serial. (once again replace ttyUSB0 with your port if needed)
 
 ```zsh
 screen /dev/ttyUSB0 115200 
@@ -32,41 +37,45 @@ lcd.print("hello!")
 ```
 To terminate the screen press (crtl+shift+a then the \ key and finally y)
 
-# Getting umqtt
+## Getting umqtt
+
+1. Enter the install_umqtt directory
+
 ```zsh
 cd install_umqtt
 ``` 
 
-next create a hotspot or find a 2.4ghz router with a good internet connection, note the ssid and password.
+2. Create a hotspot or find a 2.4ghz router with a good internet connection, note the ssid and password.
 You will be downloading a python library directly to the M5stack using upip (u - means micro)
 
-edit main.py (in the install_umqtt directory) to use your ssid and password. Then place it on the device.
+3. edit main.py (in the install_umqtt directory) to use your ssid and password. Then place it on the device.
 
 ```zsh
 ampy -p /dev/ttyUSB0 -b 115200 put main.py
 ```
 This will attempt to write whatever is in main.py in your cwd to the device via serial, if it doesn't work the first time, connect to the m5stack via serial (i.e. screen) and make sure you can get a REPL. If not, hard reset the device with the reset button and spam ctrl+c to stop whatever main.py is blocking your device. Once you get the prompt, ">>>", you can terminate the screen and use ampy.
 
-Once this main.py is on your device and connected to your ap (which you provided the ssid and password for), connect to it via serial and issue the following commands
+4. Once this main.py is on your device and connected to your ap (which you provided the ssid and password for), connect to it via serial and issue the following commands
 
 ```zsh
 import upip
 upip.install('micropython-umqtt.simple')
 ```
-Now you should have umqtt.simple install on your device, it persists event after hard rebooting.
+Now you should have umqtt.simple install on your device, it **persists event after hard rebooting.**
+**There may be cases when a bad upip installation damages the micropython firmware, in this case, repeat the procedure to flash the firmware**
 
-# Solace PubSub
-create a solace pubsub account and get the connection information.
-
+## Solace PubSub
+1. Create a solace pubsub account and get the connection information.
+![alt text](images/connection_details.jpg)
 you will need, client id, tcp connection string, port and password.
 
-once you have the above, substitute the values in main.py (in the main directory), along with your ssid and password.
-once everything has been added move the file over with ampy
+2. Substitute the values from the previous step into main.py (in the main directory), along with your ssid and password.
+3. Once everything has been added move the file over with ampy
 
 ```zsh
 ampy -p /dev/ttyUSB0 -b 115200 put main.py
 ```
 
-hard reboot and then enter the try-me tab on the solace cloud. Subscribe to the "device/*" topic and you should see data coming from your device.
+4. Hard reboot and then enter the try-me tab on the solace cloud. Subscribe to the "device/*" topic and you should see data coming from your device.
 
-
+5. A small physics fact: all objects on the earths surface are accelerating towards it core at ~9.81 m/(s^2). Given this, you can determine which face of the M5Stack corresponds with the x, y, and z accelerometer readings.
