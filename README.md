@@ -1,6 +1,6 @@
 # Preluminary
 Please use a linux distro for the following tutorial
-* You can dual boot you computer : https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/
+* You can dual boot your computer : https://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/
 * You can set up a VM with a linux distro : https://brb.nci.nih.gov/seqtools/installUbuntu.html
 
 To effectively use Micropython on the M5stack you will need python3, esptool.py, and adafruit-ampy 
