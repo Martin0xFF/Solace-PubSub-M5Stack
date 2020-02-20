@@ -16,7 +16,8 @@ This repo has a version of micropython for the M5Stack already availible. You ca
 ```zsh
 ls /dev |grep ttyUSB
 ```
-**You should see it on ttyUSB0, if there are multiple ttyUSB* then remove peripherals connected to your computer or take note of the tty that the m5stack uses and replace accordingly within upload.sh.**
+**You should see it on ttyUSB0, if there are multiple ttyUSB* then remove peripherals connected to your computer or take note of the tty that the m5stack uses and replace accordingly within upload.sh.
+
 2. Enter the firmware directory and call the flash script
 ```zsh
 cd firmware
@@ -24,6 +25,7 @@ sh upload.sh
 ```
 
 This should install a special version of micropython able to utilize the M5Stack's on board peripherals.
+
 3. To test this connect to the board via serial. (once again replace ttyUSB0 with your port if needed)
 
 ```zsh
@@ -62,7 +64,7 @@ import upip
 upip.install('micropython-umqtt.simple')
 ```
 Now you should have umqtt.simple install on your device, it **persists event after hard rebooting.**
-**There may be cases when a bad upip installation damages the micropython firmware, in this case, repeat the procedure to flash the firmware**
+**There may be cases when a bad upip installation damages the micropython firmware, in this case, repeat the procedure to flash the firmware
 
 ## Solace PubSub
 1. Create a solace pubsub account and get the connection information.
@@ -70,6 +72,7 @@ Now you should have umqtt.simple install on your device, it **persists event aft
 you will need, client id, tcp connection string, port and password.
 
 2. Substitute the values from the previous step into main.py (in the main directory), along with your ssid and password.
+
 3. Once everything has been added move the file over with ampy
 
 ```zsh
