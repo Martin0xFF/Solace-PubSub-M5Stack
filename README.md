@@ -9,6 +9,12 @@ pip3 install esptool
 pip3 install adafruit-ampy
 ```
 
+You will also need an M5Stack gray, this can be found on [Amazon][1] or [the M5Stack Site][2]
+
+[1]:https://www.amazon.ca/M5Stack-Mpu9250-Development-Extensible-Arduino/dp/B07PFVGG2Y/ref=sr_1_1?keywords=m5stack&qid=1582161563&sr=8-1
+
+[2]:https://m5stack.com/products/grey-development-core
+
 ## Flash Micropython onto your M5Stack Gray
 This repo has a version of micropython for the M5Stack already availible. You can create your own firmware if you clone the following repo: https://github.com/m5stack/M5Stack_MicroPython
 
