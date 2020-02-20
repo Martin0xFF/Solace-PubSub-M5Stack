@@ -75,7 +75,7 @@ Now you should have umqtt.simple install on your device, it **persists event aft
 
 ## Solace PubSub
 1. Create a solace pubsub account and get the connection information.
-![alt text](images/connection_details.jpg)
+![alt text](https://github.com/Martin0xFF/Solace-PubSub-M5Stack/blob/master/images/connection_details.png)
 you will need, client id, tcp connection string, port and password.
 
 2. Substitute the values from the previous step into main.py (in the main directory), along with your ssid and password.
