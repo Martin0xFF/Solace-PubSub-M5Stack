@@ -63,7 +63,8 @@ This will attempt to write whatever is in main.py in your cwd to the device via 
 import upip
 upip.install('micropython-umqtt.simple')
 ```
-Now you should have umqtt.simple install on your device, it **persists event after hard rebooting.**
+Now you should have umqtt.simple install on your device, it **persists event after hard rebooting.
+
 **There may be cases when a bad upip installation damages the micropython firmware, in this case, repeat the procedure to flash the firmware
 
 ## Solace PubSub
